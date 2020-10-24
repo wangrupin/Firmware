@@ -208,11 +208,11 @@ RCInput::fill_rc_in(uint16_t raw_rc_count_local,
 			_rc_in.rssi = rssi_analog;
 
 		} else {
-			_rc_in.rssi = 255;
+			_rc_in.rssi = input_rc_s::RC_RSSI_UNDEFINED;
 		}
 
 #else
-		_rc_in.rssi = 255;
+		_rc_in.rssi = input_rc_s::RC_RSSI_UNDEFINED;
 #endif
 
 	} else {
@@ -220,7 +220,7 @@ RCInput::fill_rc_in(uint16_t raw_rc_count_local,
 	}
 
 	if (valid_chans == 0) {
-		_rc_in.rssi = 0;
+		_rc_in.rssi = input_rc_s::RC_RSSI_NO_SIGNAL;
 	}
 
 	_rc_in.rc_failsafe = failsafe;
@@ -439,7 +439,7 @@ void RCInput::Run()
 
 					for (unsigned i = 0; i < (unsigned)newBytes; i++) {
 						/* set updated flag if one complete packet was parsed */
-						st24_rssi = RC_INPUT_RSSI_MAX;
+						st24_rssi = input_rc_s::RC_RSSI_MAX;
 						rc_updated = (OK == st24_decode(_rcs_buf[i], &st24_rssi, &lost_count,
 										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS));
 					}
@@ -488,7 +488,7 @@ void RCInput::Run()
 
 					for (unsigned i = 0; i < (unsigned)newBytes; i++) {
 						/* set updated flag if one complete packet was parsed */
-						sumd_rssi = RC_INPUT_RSSI_MAX;
+						sumd_rssi = input_rc_s::RC_RSSI_MAX;
 						rc_updated = (OK == sumd_decode(_rcs_buf[i], &sumd_rssi, &rx_count,
 										&_raw_rc_count, _raw_rc_values, input_rc_s::RC_INPUT_MAX_CHANNELS, &sumd_failsafe));
 					}

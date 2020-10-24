@@ -61,7 +61,7 @@
 /**
  * Maximum RSSI value
  */
-#define RC_INPUT_RSSI_MAX	100
+#define RC_INPUT_RSSI_MAX	100 //should be same as  input_rc_s::RC_RSSI_MAX
 
 /**
  * Input signal type, value is a control position from zero to 100
